@@ -1,0 +1,137 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        #grid-table .rewardLabel
+        {
+            background-color: #206ba9;
+            color: #c2e0f8;
+        }
+        #grid-table .rewardLabel2
+        {
+            background-color: #86c2f3;
+            color: #000910;
+        }
+        #grid-table
+        {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 2px;
+            background-color: #2196F3;
+            padding: 1px;
+        }
+        #grid-table div
+        {
+            background-color: #cbe7fd;
+            text-align: center;
+            padding: 1px 0px;
+            font-size:2.5vw;
+        }
+        #item01{grid-column:1/span 4;}#item02{grid-column:5/span 2;}#item03{grid-column:7/span 2;}#item04{grid-column:9/span 2;}
+        #item05{grid-column:1/span 4;}#item06{grid-column:5/span 2;}#item07{grid-column:7/span 2;}#item08{grid-column:9/span 2;}
+        #dig6_1{grid-column:1/span 4;}#dig2_01{grid-column:9/span 2;}
+        #item15{grid-column:1/span 3;}#item16{grid-column:4/span 2;}#item17{grid-column:6/span 2;}#item18{grid-column:8/span 3;}
+        #dig6_2{grid-column:1/span 3;}#dig6_3{grid-column:4/span 2;}
+        #item26{grid-column:1/span 2;}#item27{grid-column:3/span 8;}
+        #item38{grid-column:1/span 2;}#item39{grid-column:3/span 8;}
+        #item50{grid-column:1/span 2;}#item51{grid-column:3/span 8;}
+
+        #ctrl
+        {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 2px;
+            background-color: rgba(255, 255, 255, 0);
+            padding-top: 10px;
+        }
+        #ctrl input
+        {
+            text-align: center;
+            padding-left:1px;
+            padding-bottom: 5px;
+            font-size: 2.5vw;
+            width: 9vw;
+        }
+        
+    </style>
+    <title>test</title>
+</head>
+<body onload="randomTable()">
+    <div id="grid-table">
+        <div class="rewardLabel" id="item01" style="font-size: 3.5vw;">รางวัลที่ 1</div><div class="rewardLabel" id="item02" style="padding-top:4px;">เลขหน้า 3 ตัว</div><div class="rewardLabel" id="item03" style="padding-top:4px;">เลขท้าย 3 ตัว</div><div class="rewardLabel" id="item04" style="padding-top:4px;">เลขท้าย 2 ตัว</div>
+        <div class="rewardLabel2" id="item05" style="font-size: 3vw;">รางวัลละ 6,000,000 บาท</div><div class="rewardLabel2" id="item06" style="font-size: 2vw; padding-top:4px;">รางวัลละ 4,000 บาท</div><div class="rewardLabel2" id="item07" style="font-size: 2vw; padding-top:4px;">รางวัลละ 4,000 บาท</div><div class="rewardLabel2" id="item08" style="font-size: 2vw; padding-top:4px;">รางวัลละ 2,000 บาท</div>
+        <div id="dig6_1"></div><div id="dig3_01"></div><div id="dig3_02"></div><div id="dig3_03"></div><div id="dig3_04"></div><div id="dig2_01"></div>
+        <div class="rewardLabel" id="item15">รางวัลข้างเคียงรางวัลที่ 1</div><div class="rewardLabel2" id="item16" style="font-size: 1.8vw; padding-top:3px;">รางวัลละ 100,000 บาท</div><div class="rewardLabel" id="item17">รางวัลที่ 2</div><div class="rewardLabel2" id="item18">รางวัลละ 200,000 บาท</div>
+        <div id="dig6_2"></div><div id="dig6_3"></div><div id="dig6_4"></div><div id="dig6_5"></div><div id="dig6_6"></div><div id="dig6_7"></div><div id="dig6_8"></div>
+        <div class="rewardLabel" id="item26">รางวัลที่ 3</div><div class="rewardLabel2" id="item27">รางวัลละ 80,000 บาท</div>
+        <div id="dig6_9"></div><div id="dig6_10"></div><div id="dig6_11"></div><div id="dig6_12"></div><div id="dig6_13"></div><div id="dig6_14"></div><div id="dig6_15"></div><div id="dig6_16"></div><div id="dig6_17"></div><div id="dig6_18"></div>
+        <div class="rewardLabel" id="item38">รางวัลที่ 4</div><div class="rewardLabel2" id="item39">รางวัลละ 40,000 บาท</div>
+        <div id="dig6_19"></div><div id="dig6_20"></div><div id="dig6_21"></div><div id="dig6_22"></div><div id="dig6_23"></div><div id="dig6_24"></div><div id="dig6_25"></div><div id="dig6_26"></div><div id="dig6_27"></div><div id="dig6_28"></div>
+        <div class="rewardLabel" id="item50">รางวัลที่ 5</div><div class="rewardLabel2" id="item51">รางวัลละ 20,000 บาท</div>
+        <div id="dig6_29"></div><div id="dig6_30"></div><div id="dig6_31"></div><div id="dig6_32"></div><div id="dig6_33"></div><div id="dig6_34"></div><div id="dig6_35"></div><div id="dig6_36"></div><div id="dig6_37"></div><div id="dig6_38"></div>
+    </div>
+    <div id="ctrl">
+        <div id="gr0"><input id="lott0" type="text"></div><div id="gr1"><input id="lott1" type="text"></div><div id="gr2"><input id="lott2" type="text"></div><div id="gr3"><input id="lott3" type="text"></div><div id="gr4"><input id="lott4" type="text"></div>
+        <div id="gr5"><input id="lott5" type="text"></div><div id="gr6"><input id="lott6" type="text"></div><div id="gr7"><input id="lott7" type="text"></div><div id="gr8"><input id="lott8" type="text"></div><div id="gr9"><input id="lott9" type="text"></div>
+        <div id="gr11"><button id="bt_random" onclick="randomlotto()">Random</button></div>
+    </div>
+    <script>
+        function randomTable()
+        {   
+            let IdName="";
+            let Num = DigitRand(6);
+            document.getElementById("dig6_1").innerHTML=Num;
+            document.getElementById("dig6_2").innerHTML=(parseInt(Num)-1).toString().padStart(6,"0");
+            document.getElementById("dig6_3").innerHTML=(parseInt(Num)+1).toString().padStart(6,"0");
+            for(let i=4;i<=38;i++)
+            {
+                IdName="dig6_"+i.toString();
+                if(i>=19&&i<29)
+                {
+                    Num="";
+                    for(let j=0;j<=3;j++)
+                    {
+                        Num+=DigitRand(6)+"<br>";
+                    }
+                    Num+=DigitRand(6);
+                    document.getElementById(IdName).innerHTML=Num;
+                }
+                else if(i>=29)
+                {
+                    Num="";
+                    for(let j=0;j<=8;j++)
+                    {
+                        Num+=DigitRand(6)+"<br>";
+                    }
+                    Num+=DigitRand(6);
+                    document.getElementById(IdName).innerHTML=Num;
+                }
+                else
+                {
+                    document.getElementById(IdName).innerHTML=DigitRand(6);
+                }
+            }
+            document.getElementById("dig3_01").innerHTML=DigitRand(3);
+            document.getElementById("dig3_02").innerHTML=DigitRand(3);
+            document.getElementById("dig3_03").innerHTML=DigitRand(3);
+            document.getElementById("dig3_04").innerHTML=DigitRand(3);
+            document.getElementById("dig2_01").innerHTML=DigitRand(2);
+        }
+        function randomlotto()
+        {
+            let IdName =""
+            for(let i=0; i<10; i++)
+            {
+                IdName="lott"+i.toString()
+                document.getElementById(IdName).value=DigitRand(6)
+            }
+        }
+        function DigitRand(dig)
+        {
+            const Num = Math.floor(Math.random()*(10**dig));
+            return Num.toString().padStart(dig,"0");
+        }
+    </script>
+</body>
+</html>
