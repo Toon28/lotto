@@ -3,6 +3,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+		.green_c
+		{
+			color: #39a12f;
+		}
+		.black_c
+		{
+			color: black;
+		}
         #grid-table .rewardLabel
         {
             background-color: #206ba9;
@@ -36,6 +44,7 @@
         #item26{grid-column:1/span 2;}#item27{grid-column:3/span 8;}
         #item38{grid-column:1/span 2;}#item39{grid-column:3/span 8;}
         #item50{grid-column:1/span 2;}#item51{grid-column:3/span 8;}
+		
 
         #ctrl
         {
@@ -48,16 +57,28 @@
         #ctrl input
         {
             text-align: center;
-            padding-left:1px;
+			padding-left:1px;
             padding-bottom: 5px;
-            font-size: 2.5vw;
+            font-size: 2vw;
             width: 9vw;
         }
-        
+		#ctrl button
+		{
+			font-size: 2vw;
+		}
+		#gr11{grid-column:1/span 2;}
+		#gr12{grid-column:3/span 2;}
+		#gr13{grid-column:5/span 2;}
+		#gr14{grid-column:7/span 2;font-size: 2.3vw;}
+		#cost{grid-column:9/span 2;font-size: 2.3vw;}
+		#gr18{grid-column:8/span 2;font-size: 2.3vw;}
+		#lb1,#lb2,#lb3,#lb4{font-size: 1.4vw;}
+		#gr15,#gr16,#gr17,#gr19{font-size: 2.2vw;}
+		
     </style>
     <title>test</title>
 </head>
-<body onload="randomTable()">
+<body>
     <div id="grid-table">
         <div class="rewardLabel" id="item01" style="font-size: 3.5vw;">รางวัลที่ 1</div><div class="rewardLabel" id="item02" style="padding-top:4px;">เลขหน้า 3 ตัว</div><div class="rewardLabel" id="item03" style="padding-top:4px;">เลขท้าย 3 ตัว</div><div class="rewardLabel" id="item04" style="padding-top:4px;">เลขท้าย 2 ตัว</div>
         <div class="rewardLabel2" id="item05" style="font-size: 3vw;">รางวัลละ 6,000,000 บาท</div><div class="rewardLabel2" id="item06" style="font-size: 2vw; padding-top:4px;">รางวัลละ 4,000 บาท</div><div class="rewardLabel2" id="item07" style="font-size: 2vw; padding-top:4px;">รางวัลละ 4,000 บาท</div><div class="rewardLabel2" id="item08" style="font-size: 2vw; padding-top:4px;">รางวัลละ 2,000 บาท</div>
@@ -74,16 +95,20 @@
     <div id="ctrl">
         <div id="gr0"><input id="lott0" type="text"></div><div id="gr1"><input id="lott1" type="text"></div><div id="gr2"><input id="lott2" type="text"></div><div id="gr3"><input id="lott3" type="text"></div><div id="gr4"><input id="lott4" type="text"></div>
         <div id="gr5"><input id="lott5" type="text"></div><div id="gr6"><input id="lott6" type="text"></div><div id="gr7"><input id="lott7" type="text"></div><div id="gr8"><input id="lott8" type="text"></div><div id="gr9"><input id="lott9" type="text"></div>
-        <div id="gr11"><button id="bt_random" onclick="randomlotto()">Random</button></div>
-    </div>
+        <div id="gr11"><center><button id="bt_lotto" onclick="randomlotto()">RandomLotto</button></center></div><div id="gr12"><center><button id="bt_random" onclick="randomTable()">RandomTable</button></center></div>
+		<div id="gr13"><center><button id="bt_loop">RandomLoop</button></center></div><div id="gr14"></div><div id="cost"></div><div id="lb1">เลขหน้า3ตัว</div><div id="gr15"></div><div id="lb2">เลขหลัง3ตัว</div><div id="gr16"></div><div id="lb3">เลขหลัง2ตัว</div><div id="gr17"></div>
+		<div id="lb4">เงินรางวัล</div><div id="gr18"></div><div id="gr19"></div>
+	</div>
     <script>
+		
         function randomTable()
         {   
             let IdName="";
             let Num = DigitRand(6);
-            document.getElementById("dig6_1").innerHTML=Num;
+			document.getElementById("dig6_1").innerHTML=Num;
             document.getElementById("dig6_2").innerHTML=(parseInt(Num)-1).toString().padStart(6,"0");
             document.getElementById("dig6_3").innerHTML=(parseInt(Num)+1).toString().padStart(6,"0");
+			
             for(let i=4;i<=38;i++)
             {
                 IdName="dig6_"+i.toString();
@@ -117,14 +142,46 @@
             document.getElementById("dig3_03").innerHTML=DigitRand(3);
             document.getElementById("dig3_04").innerHTML=DigitRand(3);
             document.getElementById("dig2_01").innerHTML=DigitRand(2);
+			check();
+			if(Loop)
+			{
+				countloop++;
+				const Cost=countloop*count_lotto*80//ราคาใบละ100
+				const Reward=(parseInt(count_le3)*4000)+(parseInt(count_la3)*4000)+(parseInt(count_la2)*2000)
+				document.getElementById("gr14").innerHTML=(countloop*count_lotto).toString()+" ใบ";
+				document.getElementById("cost").innerHTML=Cost.toString()+" บาท";
+				document.getElementById("gr15").innerHTML=count_le3;
+				document.getElementById("gr16").innerHTML=count_la3;
+				document.getElementById("gr17").innerHTML=count_la2;
+				document.getElementById("gr18").innerHTML=Reward.toString()+" บาท";
+				document.getElementById("gr19").innerHTML=((Reward*100)/Cost).toFixed(2)+"%"
+				if(Stop!="-1")
+				{
+					startLoop();
+					alert(`${Stop} won the lottery`);
+				}
+			}
+			else
+			{
+				document.getElementById("gr14").innerHTML="0";
+				document.getElementById("cost").innerHTML="0";
+				document.getElementById("gr15").innerHTML="0";
+				document.getElementById("gr16").innerHTML="0";
+				document.getElementById("gr17").innerHTML="0";
+				document.getElementById("gr18").innerHTML="0";
+				document.getElementById("gr19").innerHTML="0";
+				console.log("setzero")
+			}
+			
         }
         function randomlotto()
         {
             let IdName =""
             for(let i=0; i<10; i++)
             {
-                IdName="lott"+i.toString()
-                document.getElementById(IdName).value=DigitRand(6)
+                IdName="lott"+i.toString();
+                document.getElementById(IdName).value=DigitRand(6);
+				document.getElementById(IdName).style.color="#202020";
             }
         }
         function DigitRand(dig)
@@ -132,6 +189,114 @@
             const Num = Math.floor(Math.random()*(10**dig));
             return Num.toString().padStart(dig,"0");
         }
+		function check()
+		{
+			
+			let reward="-1";
+			let IdName="";
+			let Lotto=[];
+			let num="";
+			count_lotto=0;
+			for(let i=0;i<10;i++)
+			{
+				IdName="lott"+i.toString();
+				const elem=document.getElementById(IdName);
+				num=elem.value;
+				if(/^\d{6}$/.test(num))
+				{
+					Lotto.push(num);
+					elem.style.color="#202020";
+					count_lotto++;
+				}
+				else
+				{
+					elem.style.color="#ff2020";
+				}
+			}
+			{
+				let lead3 = [];
+				let lag2 = []; 
+				let lag3 = [];
+				Lotto.map(lotto => {
+				lead3.push(lotto.slice(0,3));
+				lag2.push(lotto.slice(4));
+				lag3.push(lotto.slice(3));
+				});
+				const elem1=document.getElementById("dig3_01");
+				const elem2=document.getElementById("dig3_02");
+				const elem3=document.getElementById("dig3_03");
+				const elem4=document.getElementById("dig3_04");
+				const elem5=document.getElementById("dig2_01");
+				if(lead3.some(item=>item==elem1.innerText)){elem1.innerHTML=`<span class="green_c">${elem1.innerText}</span>`;reward=elem1.innerText; count_le3++;}
+				else elem1.innerHTML=`<span class="black_c">${elem1.innerText}</span>`;
+				if(lead3.some(item=>item==elem2.innerText)){elem2.innerHTML=`<span class="green_c">${elem2.innerText}</span>`;reward=elem2.innerText; count_le3++;}
+				else elem2.innerHTML=`<span class="black_c">${elem2.innerText}</span>`;
+				if(lag3.some(item=>item==elem3.innerText)){elem3.innerHTML=`<span class="green_c">${elem3.innerText}</span>`;reward=elem3.innerText; count_la3++;}
+				else elem3.innerHTML=`<span class="black_c">${elem3.innerText}</span>`;
+				if(lag3.some(item=>item==elem4.innerText)){elem4.innerHTML=`<span class="green_c">${elem4.innerText}</span>`;reward=elem4.innerText; count_la3++;}
+				else elem4.innerHTML=`<span class="black_c">${elem4.innerText}</span>`;
+				if(lag2.some(item=>item==elem5.innerText)){elem5.innerHTML=`<span class="green_c">${elem5.innerText}</span>`;reward=elem5.innerText; count_la2++;}
+				else elem5.innerHTML=`<span class="black_c">${elem5.innerText}</span>`;
+			}
+			for(let i=1;i<=38;i++)
+			{
+				IdName="dig6_"+i.toString();
+				const elem=document.getElementById(IdName);
+				if(i>=19)
+                {
+					const texts = elem.innerText.split('\n')
+									
+					const Result = texts.map(text => {
+						if (Lotto.includes(text)){ return `<span class="green_c">${text}</span>`;reward=elem.innerText;}
+						else return `<span class="black_c">${text}</span>`;
+					}).join('<br>');
+					elem.innerHTML = Result;
+				}
+                else
+                {
+					if(Lotto.includes(elem.innerText)){ elem.innerHTML=`<span class="green_c">${elem.innerText}</span>`;reward=elem.innerText;}
+					else elem.innerHTML=`<span class="black_c">${elem.innerText}</span>`;
+                }
+			}
+			if(reward!="-1")
+			{
+				if(reward.length==6)
+				{
+					Stop=reward;
+				}
+			}
+		}
+		let Stop="-1";
+		let Loop = false;
+		let intervalId=null;
+		let countloop=0;
+		let count_le3=0;
+		let count_la2=0;
+		let count_la3=0;
+		let count_lotto=0;
+		function startLoop()
+		{
+			if(!Loop)
+			{
+				document.getElementById("bt_loop").innerText="Random Stop"
+				intervalId = setInterval(randomTable, 1);//เร็วช้า
+				countloop=0;
+				count_le3=0;
+				count_la2=0;
+				count_la3=0;
+				Loop=true;
+			}
+			else
+			{
+				document.getElementById("bt_loop").innerText="Random Start";
+				clearInterval(intervalId);
+				Loop=false;
+			}
+		}
+		document.addEventListener("DOMContentLoaded", function() {
+			document.getElementById("bt_loop").onclick = startLoop;
+			randomTable();
+		});
     </script>
 </body>
 </html>
